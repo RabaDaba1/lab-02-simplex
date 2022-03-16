@@ -8,7 +8,7 @@ class ConstraintType(Enum):
         An enum to represent a constraint type:
         - LE = less than or equal
         - EQ = equality
-        - GR = greater than or equal
+        - GE = greater than or equal
     """
     LE = -1
     EQ = 0

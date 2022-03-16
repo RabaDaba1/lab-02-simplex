@@ -1,12 +1,12 @@
 from __future__ import annotations
 from typing import List
+from saport.simplex.exceptions import DuplicateVariableError, EmptyModelError, MissingObjectiveError
 
 import saport.simplex.expressions.objective as sseobj
 import saport.simplex.expressions.constraint as ssecon
 import saport.simplex.solver as ssslv
 import saport.simplex.expressions.expression as sseexp
 import saport.simplex.solution as sssol
-from copy import deepcopy
 
 class Model:
     """
@@ -55,7 +55,7 @@ class Model:
     def create_variable(self, name: str) -> sseexp.Variable:
         for var in self.variables:
             if (var.name == name):
-                raise Exception(f"There is already a variable named {name}")
+                raise DuplicateVariableError(name)
 
         new_index = len(self.variables)
         variable = sseexp.Variable(name, new_index)
@@ -81,10 +81,10 @@ class Model:
 
     def solve(self) -> sssol.Solution:
         if len(self.variables) == 0:
-            raise Exception("Can't solve a model without any variables")
+            raise EmptyModelError()
 
         if self.objective == None:
-            raise Exception("Can't solve a model without an objective")
+            raise MissingObjectiveError()
 
         solver = ssslv.Solver()
         return solver.solve(self)
