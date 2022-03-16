@@ -76,14 +76,14 @@ class Model:
         """ Simplifies all expressions in the model """
         for c in self.constraints:
             c.simplify()
-        assert self.objective != None, "objective has to be defined before simplifying the model"
-        self.objective.simplify()
+        if self.objective is not None:
+            self.objective.simplify()
 
     def solve(self) -> sssol.Solution:
         if len(self.variables) == 0:
             raise EmptyModelError()
 
-        if self.objective == None:
+        if self.objective is None:
             raise MissingObjectiveError()
 
         solver = ssslv.Solver()
