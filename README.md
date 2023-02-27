@@ -24,7 +24,7 @@ In case you were using some weird OS (e.g. Windows), you may have to run `python
 ### Examples 
 
 The example files are very basic acceptance tests and **are not** used in the grading process.  
-*Warning*: to run the examples, you should first implement the simplex algorithm. Otherwise the examples will just hang due to the `pass` methods in the `saport.simplex.solver.Tableaux`.
+*Warning*: to run the examples, you should first implement the simplex algorithm.
 
 Then you can just run every example using `python path_to_example.py`, or you can ran all the examples with: `python test.py`.
 
