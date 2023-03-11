@@ -8,7 +8,7 @@ import saport.simplex.expressions.objective as sseobj
 import saport.simplex.expressions.constraint as ssecon
 import saport.simplex.expressions.expression as sseexp
 import saport.simplex.solution as sssol
-import saport.simplex.tableaux as sstab
+import saport.simplex.tableau as sstab
 import numpy as np 
 
 class Solver:
@@ -24,7 +24,7 @@ class Solver:
     
         Methods
         -------
-        solve(model: Model) -> Tableaux:
+        solve(model: Model) -> Tableau:
             solves the given model and return the first solution
     """
     _slacks: Dict[sseexp.Variable, ssecon.Constraint]
@@ -32,25 +32,25 @@ class Solver:
 
     def solve(self, model: ssmod.Model):
         normal_model = self._augment_model(model)
-        tableaux = self._basic_initial_tableaux(normal_model)
-        if self._optimize(tableaux) == False:
-            return sssol.Solution.unbounded(model, tableaux)
+        tableau = self._basic_initial_tableau(normal_model)
+        if self._optimize(tableau) == False:
+            return sssol.Solution.unbounded(model, tableau)
 
-        assignment = tableaux.extract_assignment()
-        return self._create_solution(assignment, model, tableaux)
+        assignment = tableau.extract_assignment()
+        return self._create_solution(assignment, model, tableau)
 
-    def _optimize(self, tableaux: sstab.Tableaux):
+    def _optimize(self, tableau: sstab.Tableau):
         """
-            _optimize(model: Tableaux) -> bool:
+            _optimize(model: Tableau) -> bool:
                 main simplex loop
         """
-        while not tableaux.is_optimal():
-            pivot_col = tableaux.choose_entering_variable()
-            if tableaux.is_unbounded(pivot_col):
+        while not tableau.is_optimal():
+            pivot_col = tableau.choose_entering_variable()
+            if tableau.is_unbounded(pivot_col):
                 return False
-            pivot_row = tableaux.choose_leaving_variable(pivot_col)
+            pivot_row = tableau.choose_leaving_variable(pivot_col)
 
-            tableaux.pivot(pivot_row, pivot_col)
+            tableau.pivot(pivot_row, pivot_col)
         return True
 
     def _augment_model(self, original_model: ssmod.Model):
@@ -96,10 +96,10 @@ class Solver:
                 constraint.type = ssecon.ConstraintType.EQ
         return surpluses 
 
-    def _basic_initial_tableaux(self, model: ssmod.Model):
+    def _basic_initial_tableau(self, model: ssmod.Model):
         objective_row = np.array((-1 * model.objective.expression).coefficients(model) + [0.0])
         table = np.array([objective_row] + [c.expression.coefficients(model) + [c.bound] for c in model.constraints])
-        return sstab.Tableaux(model, table)
+        return sstab.Tableau(model, table)
 
-    def _create_solution(self, assignment: List[float], model: ssmod.Model, tableaux: sstab.Tableaux):
-        return sssol.Solution.with_assignment(model, assignment, tableaux)
+    def _create_solution(self, assignment: List[float], model: ssmod.Model, tableau: sstab.Tableau):
+        return sssol.Solution.with_assignment(model, assignment, tableau)

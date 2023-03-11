@@ -2,7 +2,7 @@
 
 The goal of this is lab is to implement a basic simplex solver. One has to:
 
-* fill missing code in the `saport.simplex.tableaux.Tableaux` class
+* fill missing code in the `saport.simplex.tableau.Tableau` class
 * create two models to test the algorithm, filling missing code in the `example_02_solvable.py` and `example_03_unbounded.py` files
 
 ## SAPORT
@@ -15,7 +15,7 @@ The project depends on the fairly recent numpy distribution and Python interpret
 
 ## How To Run Local Tests
 
-### Tableaux Class
+### Tableau Class
 
 Just ran the `pytest` command, given you have installed all the requirements from the `requirements.txt`.
 
@@ -24,7 +24,7 @@ In case you were using some weird OS (e.g. Windows), you may have to run `python
 ### Examples 
 
 The example files are very basic acceptance tests and **are not** used in the grading process.  
-*Warning*: to run the examples, you should first implement the simplex algorithm. Otherwise the examples will just hang due to the `pass` methods in the `saport.simplex.solver.Tableaux`.
+*Warning*: to run the examples, you should first implement the simplex algorithm. Otherwise the examples will just hang due to the `pass` methods in the `saport.simplex.solver.Tableau`.
 
 Then you can just run every example using `python path_to_example.py`, or you can ran all the examples with: `python test.py`.
 
@@ -77,11 +77,10 @@ The rest will be taken care of automatically. You can check the `GRADE.md` file 
 │       │   ├── constraint.py  # class representing linear constraint
 │       │   ├── expression.py  # class representing linear expression
 │       │   └── objective.py   # class representing objective
-│       ├── exception.py # project specific exceptions
-│       ├── model.py    # class allowing to create linear programming models
-│       ├── solution.py # class representing solutions to the problems
-│       ├── solver.py   # this class contains main simplex solver loop
-│       └── tableaux.py # TODO: class representing so called simplex tableaux — you have to fill some code here!
-├── test_screenshot.png # just a screenshot used in the README
-└── tests               # directory with local tests
+│       ├── exceptions.py # project specific exceptions
+│       ├── model.py      # class allowing to create linear programming models
+│       ├── solution.py   # class representing solutions to the problems
+│       ├── solver.py     # this class contains main simplex solver loop
+│       └── tableau.py   # TODO: class representing so called simplex tableau — you have to fill some code here!
+└── tests                 # directory with local tests
 ```

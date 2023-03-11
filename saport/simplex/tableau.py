@@ -12,25 +12,25 @@ eps is used to avoid numerical errors, e.g.
 eps = 1e-09
 
 
-class Tableaux:
+class Tableau:
     """
-    A class to represent a tableaux to linear programming problem.
+    A class to represent a tableau to linear programming problem.
 
     Attributes
     ----------
     model : Model
-        model corresponding to the tableaux
+        model corresponding to the tableau
     table : numpy.Array
-        2d-array with the tableaux
+        2d-array with the tableau
 
     Methods
     -------
-    __init__(model: Model, table: array) -> Tableaux:
-        constructs a new tableaux for the specified model and initial table
+    __init__(model: Model, table: array) -> Tableau:
+        constructs a new tableau for the specified model and initial table
     objective_coefficients() -> numpy.Array:
         returns a vector containing coefficients in the objective row
     objective_value() -> float:
-        returns the objective value of solution represented in tableaux
+        returns the objective value of solution represented in tableau
     is_optimal() -> bool:
         checks whether the current solution is optimal
     choose_entering_variable() -> int:
@@ -40,9 +40,9 @@ class Tableaux:
     choose_leaving_variable(col: int) -> int:
         finds index of the variable, that should leave the basis next
     pivot(col: int, row: int):
-        updates tableaux using pivot operation with given entering and leaving variables
+        updates tableau using pivot operation with given entering and leaving variables
     extract_assignment() -> List[float]:
-        returns assignment corresponding to the tableaux
+        returns assignment corresponding to the tableau
     extract_basis() -> List[int]
         returns list of indexes corresponding to the variables belonging to the basis
     """
@@ -86,7 +86,7 @@ class Tableaux:
 
     def pivot(self, row: int, col: int):
         # TODO:
-        # Pivot operation should transform the tableaux to a form, where pivot column ('col')
+        # Pivot operation should transform the tableau to a form, where pivot column ('col')
         # contains only 0's with the exception of 1 in the pivot row ('row'), i.e.
         #
         #              col
@@ -95,8 +95,8 @@ class Tableaux:
         #  row  _ _ _ _ 1 _
         #       _ _ _ _ 0 _
         #
-        # To achieve this goal, one has to transform tableaux in a way preserving the set of solutions
-        # (remember, that tableaux represents a set of linear equations, we don't want to break them!).
+        # To achieve this goal, one has to transform tableau in a way preserving the set of solutions
+        # (remember, that tableau represents a set of linear equations, we don't want to break them!).
         # Therefore one can only use following operations taught in the secondary school:
         # - multiple the row (coefficients in the equation) by scalar, e.g.
         #       4x + 5y = 4 | * 1/5 -> 4/5x + y = 4/5
@@ -106,7 +106,7 @@ class Tableaux:
         #       ___________ -2*
         #       0x - 5y = 1
         #
-        # In other words, one can only multiple the rows of the tableaux by a scalar (numpy rows
+        # In other words, one can only multiple the rows of the tableau by a scalar (numpy rows
         # can be easily multiplied), or add one row (possibly multiplied by scalar) to another
         # (again, numpy supports this out of the box). There exists a fixed set of such operations
         # leading to the correct pivot.

@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import List
 
 import saport.simplex.model as ssmod
-import saport.simplex.tableaux as sstab
+import saport.simplex.tableau as sstab
 import saport.simplex.expressions.expression as sseexp
 
 class Solution:
@@ -14,8 +14,8 @@ class Solution:
         ----------
         model : Model
             model corresponding to the solution
-        tableaux: Tableaux
-            a simplex tableaux corresponding to the solution 
+        tableau: Tableau
+            a simplex tableau corresponding to the solution 
         is_feasible: bool
             whether the problem is feasible
         is_bounded: bool
@@ -23,8 +23,8 @@ class Solution:
 
         Methods
         -------
-        __init__(model: Model, assignment: List[float] | None, tableaux: Tableaux, is_bounded: bool) -> Solution:
-            constructs a new solution for the specified model, assignment, tableaux
+        __init__(model: Model, assignment: List[float] | None, tableau: Tableau, is_bounded: bool) -> Solution:
+            constructs a new solution for the specified model, assignment, tableau
             if the problem isn't bounded, the is_bounded flag should be false
         assignment(model: Model | None) -> List[float]:
             list with the values assigned to the variables in the model if solution is feasible and bounded, otherwise None
@@ -39,16 +39,16 @@ class Solution:
     
         Static Methods
         --------------
-        with_assignment(model: ssmod.Model, assignment: List[float], tableaux: sstab.Tableaux):
+        with_assignment(model: ssmod.Model, assignment: List[float], tableau: sstab.Tableau):
             helper method to creata solutions with valid assignments
-        unbounded(model, tableaux: sstab.Tableaux):
+        unbounded(model, tableau: sstab.Tableau):
             helper method to create unbounded solutions
     """
 
-    def __init__(self, model: ssmod.Model, assignment: List[float], tableaux: sstab.Tableaux, is_bounded: bool):
+    def __init__(self, model: ssmod.Model, assignment: List[float], tableau: sstab.Tableau, is_bounded: bool):
         self.model = model 
         self.is_bounded = is_bounded
-        self.tableaux = tableaux
+        self.tableau = tableau
         self._assignment = assignment
 
     def assignment(self, model: ssmod.Model = None):
@@ -65,12 +65,12 @@ class Solution:
         return self._assignment == None
 
     @staticmethod
-    def with_assignment(model: ssmod.Model, assignment: List[float], tableaux: sstab.Tableaux):
-        return Solution(model, assignment, tableaux, True)  
+    def with_assignment(model: ssmod.Model, assignment: List[float], tableau: sstab.Tableau):
+        return Solution(model, assignment, tableau, True)  
 
     @staticmethod
-    def unbounded(model, tableaux: sstab.Tableaux):
-        return Solution(model, None, tableaux, False)
+    def unbounded(model, tableau: sstab.Tableau):
+        return Solution(model, None, tableau, False)
 
     def __str__(self, model: ssmod.Model = None):
         model = self.model if model is None else model
