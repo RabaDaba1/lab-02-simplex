@@ -64,17 +64,17 @@ class Tableau:
         # TODO:
         # if all coefficients in the objective row are >= 0
         # tip. check the eps constant at the top of this file
-        pass
+        raise NotImplementedError()
 
     def choose_entering_variable(self) -> int:
         # TODO:
         # return column index with the smallest coefficient in the objective row
-        pass
+        raise NotImplementedError()
 
     def is_unbounded(self, col: int) -> bool:
         # TODO:
         # if all coefficients in the specified column are <= 0
-        pass
+        raise NotImplementedError()
 
     def choose_leaving_variable(self, col: int) -> int:
         # TODO:
@@ -82,7 +82,7 @@ class Tableau:
         # to choose the row, divide bound column (last column) by the specified column
         # then choose a row index associated with the smallest positive value in the result
         # tip: take care to not divide by 0 :)
-        pass
+        raise NotImplementedError()
 
     def pivot(self, row: int, col: int):
         # TODO:
@@ -110,7 +110,7 @@ class Tableau:
         # can be easily multiplied), or add one row (possibly multiplied by scalar) to another
         # (again, numpy supports this out of the box). There exists a fixed set of such operations
         # leading to the correct pivot.
-        pass
+        raise NotImplementedError()
 
     def extract_assignment(self) -> List[float]:
         rows_n, cols_n = self.table.shape
