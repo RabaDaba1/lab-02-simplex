@@ -64,31 +64,23 @@ class Tableau:
         # TODO:
         # if all coefficients in the objective row are >= 0
         # tip. check the eps constant at the top of this file
-        for coeff in self.objective_coefficients():
-            if coeff < 0:
-                return False
+        return self.objective_coefficients().min() >= -eps
 
-        return True
-
-        raise NotImplementedError()
+        # raise NotImplementedError()
 
     def choose_entering_variable(self) -> int:
         # TODO:
         # return column index with the smallest coefficient in the objective row
-        largest_index = 0
-        coeffs = self.objective_coefficients();
-        for i, coeff in enumerate(coeffs):
-            if coeff < coeffs[i]:
-                largest_index  = i
-                
-        return largest
-        raise NotImplementedError()
+        return self.objective_coefficients().argmin()
+
+        # raise NotImplementedError()
 
     def is_unbounded(self, col: int) -> bool:
         # TODO:
-        # if all coefficients in the specified column are <= 0
-        
-        raise NotImplementedError()
+        # if all coefficients in the specified column are <=0
+        return self.table[:-1, col].max() <= eps
+
+        # raise NotImplementedError()
 
     def choose_leaving_variable(self, col: int) -> int:
         # TODO:
