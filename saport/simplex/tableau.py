@@ -78,7 +78,7 @@ class Tableau:
     def is_unbounded(self, col: int) -> bool:
         # TODO:
         # if all coefficients in the specified column are <=0
-        return self.table[:, col].max() <= eps
+        return self.table[1:, col].max() <= eps
 
         # raise NotImplementedError()
 
