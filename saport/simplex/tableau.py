@@ -123,9 +123,11 @@ class Tableau:
         # (again, numpy supports this out of the box). There exists a fixed set of such operations
         # leading to the correct pivot.
 
-        while self.is_optimal():
-            entering = self.choose_entering_variable()
-            
+        self.table[row, col] /= self.table[row, col]
+
+        for i in self.table:
+            if i != row:
+                self.table[i] -= self.table[row] * self.table[i][col]
 
         # raise NotImplementedError()
 
