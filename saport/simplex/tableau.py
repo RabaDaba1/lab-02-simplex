@@ -89,8 +89,8 @@ class Tableau:
         # then choose a row index associated with the smallest positive value in the result
         # tip: take care to not divide by 0 :)
         min_index = -1
-        for row in range(1, len(self.table)-1):
-            if self.table[row, col] > 0 and (min_index == -1 or self.table[row, -1]/self.table[row, col] < self.table[min_index, -1]):
+        for row in range(1, len(self.table)):
+            if self.table[row, col] > 0 and (min_index == -1 or self.table[row, -1]/self.table[row, col] < self.table[min_index, col]):
                 min_index = row
 
         return min_index
@@ -122,7 +122,12 @@ class Tableau:
         # can be easily multiplied), or add one row (possibly multiplied by scalar) to another
         # (again, numpy supports this out of the box). There exists a fixed set of such operations
         # leading to the correct pivot.
-        raise NotImplementedError()
+
+        while self.is_optimal():
+            entering = self.choose_entering_variable()
+            
+
+        # raise NotImplementedError()
 
     def extract_assignment(self) -> List[float]:
         rows_n, cols_n = self.table.shape
