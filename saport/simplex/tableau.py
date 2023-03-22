@@ -123,7 +123,7 @@ class Tableau:
         # (again, numpy supports this out of the box). There exists a fixed set of such operations
         # leading to the correct pivot.
 
-        self.table[row, col] /= self.table[row, col]
+        self.table[row] /= self.table[row, col]
 
         for i in range(len(self.table)):
             if i != row:
