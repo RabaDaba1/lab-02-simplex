@@ -12,15 +12,18 @@ def create_model() -> Model:
     # * make some ">=" constraints (GE)
     # * the model still has to be solvable by the basix simplex withour artificial var
 
-    x1 = model.create_variable("x1")
-    x2 = model.create_variable("x2")
-    x3 = model.create_variable("x3")
+    steaks = model.create_variable("steaks")
+    potatoes = model.create_variable("potatoes")
 
-    model.add_constraint(x1 + x2 + x3 <= 30)
-    model.add_constraint(x1 + 2 * x2 + x3 >= 10)
-    model.add_constraint(2 * x2 + x3 <= 20)
+    carbohydrates = 5*steaks + 15*potatoes
+    protein = 20*steaks + 5*potatoes
+    fats = 15*steaks + 2*potatoes
 
-    model.maximize(2 * x1 + x2 + 3 * x3)
+    model.add_constraint(carbohydrates >= 50)
+    model.add_constraint(protein >= 40)
+    model.add_constraint(fats <= 60)
+
+    model.minimize(8*steaks + 4*potatoes)
 
     return model
 
@@ -38,7 +41,7 @@ def run():
 
     logging.info(solution)
 
-    assert (solution.assignment(model) == [10, 0, 20]), "Your algorithm found an incorrect solution!"
+    assert (solution.assignment(model) == [1.27, 2.91]), "Your algorithm found an incorrect solution!"
 
     logging.info("Congratulations! This solution seems to be alright :)")
 
