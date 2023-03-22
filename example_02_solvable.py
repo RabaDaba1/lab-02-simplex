@@ -14,9 +14,9 @@ def create_model() -> Model:
 
     x1 = model.create_variable('x1')
 
-    model.add_constraint(x1 <= 100)
+    model.add_constraint(x1 >= 100)
 
-    model.minimize(-x1)
+    model.minimize(x1)
 
     return model
 
