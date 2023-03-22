@@ -88,6 +88,10 @@ class Tableau:
         # to choose the row, divide bound column (last column) by the specified column
         # then choose a row index associated with the smallest positive value in the result
         # tip: take care to not divide by 0 :)
+        for row in range(1, len(self.table)):
+            
+
+
         raise NotImplementedError()
 
     def pivot(self, row: int, col: int):
