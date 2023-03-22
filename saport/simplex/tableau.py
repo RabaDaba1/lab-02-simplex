@@ -88,11 +88,13 @@ class Tableau:
         # to choose the row, divide bound column (last column) by the specified column
         # then choose a row index associated with the smallest positive value in the result
         # tip: take care to not divide by 0 :)
-        for row in range(1, len(self.table)):
-            
+        min_index = -1
+        for row in range(1, len(self.table)-1):
+            if self.table[row, col] > 0 and (min_index == -1 or self.table[row, -1]/self.table[row, col] < self.table[min_index, -1]):
+                min_index = row
 
-
-        raise NotImplementedError()
+        return min_index
+        # raise NotImplementedError()
 
     def pivot(self, row: int, col: int):
         # TODO:
