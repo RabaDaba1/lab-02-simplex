@@ -5,7 +5,7 @@ I'm happy to announce that you've managed to get **9** out of 10 points for this
 
 There still exist some issues that should be addressed before the deadline: **2023-03-29 07:59:00 CEST (+0200)**. For further details, please refer to the following list:
 
-<details><summary>[1p] Example 03 finds unbounded problem &gt;&gt; model does not have constraints</summary></details>
+<details><summary>[1p] Example 03 finds unbounded problem &gt;&gt; model is not unbounded</summary></details>
 
 -----------
 I remain your faithful servant\
