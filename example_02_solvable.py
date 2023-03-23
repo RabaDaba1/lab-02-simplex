@@ -13,10 +13,13 @@ def create_model() -> Model:
     # * the model still has to be solvable by the basix simplex withour artificial var
 
     x1 = model.create_variable('x1')
+    x2 = model.create_variable('x2')
 
-    model.add_constraint(x1 >= 100)
+    model.add_constraint(x1 <= 150)
+    model.add_constraint(x2 <= 250)
+    model.add_constraint(2*x1 + x2 <= 500)
 
-    model.minimize(x1)
+    model.minimize(8*x1 + 5*x2)
 
     return model
 
@@ -34,7 +37,7 @@ def run():
 
     logging.info(solution)
 
-    assert (solution.assignment(model) == [100]), "Your algorithm found an incorrect solution!"
+    assert (solution.assignment(model) == [0, 0]), "Your algorithm found an incorrect solution!"
 
     logging.info("Congratulations! This solution seems to be alright :)")
 
