@@ -8,6 +8,11 @@ def create_model() -> Model:
     # fill missing test based on the example_01_solvable.py
     # to make the test a bit more interesting:
     # * make the model unbounded!
+    x1 = model.create_variable("x1")
+
+    model.add_constraint(-x1 >= 2137)
+
+    model.minimize(x1)
 
     return model 
 
@@ -18,8 +23,16 @@ def run():
     #
     # TIP: you may use other solvers (e.g. https://online-optimizer.appspot.com)
     #      to find the correct solution
-    logging.info("This test is empty but it shouldn't be, fix it!")
-    raise AssertionError("Test is empty")
+    try:
+        solution = model.solve()
+    except:
+        raise AssertionError("This problem has a solution and your algorithm hasn't found it!")
+
+    logging.info(solution)
+
+    assert (not solution.is_bounded), "Your algorithm found an incorrect solution!"
+
+    logging.info("Congratulations! This solution seems to be alright :)")
 
 
 if __name__ == "__main__":
