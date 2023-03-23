@@ -10,9 +10,9 @@ def create_model() -> Model:
     # * make the model unbounded!
     x1 = model.create_variable("x1")
 
-    model.add_constraint(-x1 >= 2137)
+    model.add_constraint(x1 >= 2137)
 
-    model.minimize(x1)
+    model.maximize(x1)
 
     return model 
 
