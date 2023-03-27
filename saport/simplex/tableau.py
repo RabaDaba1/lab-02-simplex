@@ -90,7 +90,7 @@ class Tableau:
         # tip: take care to not divide by 0 :)
         min_index = -1
         for row in range(1, len(self.table)):
-            if self.table[row, col] > 0 and (min_index == -1 or self.table[row, -1]/self.table[row, col] < self.table[min_index, col]):
+            if self.table[row, col] > 0 and (min_index == -1 or self.table[row, -1]/self.table[row, col] < self.table[row, -1]/self.table[min_index, col]):
                 min_index = row
 
         return min_index
