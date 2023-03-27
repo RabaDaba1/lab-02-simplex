@@ -5,7 +5,7 @@ I'm happy to announce that you've managed to get **8** out of 10 points for this
 
 There still exist some issues that should be addressed before the deadline: **2023-03-29 07:59:00 CEST (+0200)**. For further details, please refer to the following list:
 
-<details><summary>[2p] Tableau properly chooses leaving variable &gt;&gt; tableau is unable to choose leaving variable properly:</summary>- for column [2, 6, 4] and bounds column [2, 14, 14] it should've returned 1, instead it has produced 2</details>
+<details><summary>[2p] Tableau properly chooses leaving variable &gt;&gt; tableau is unable to choose leaving variable properly:</summary>- for column [0.0, 2.0, 4.0] and bounds column [0.0, 1.0, 1e+21] it should've returned 1, instead it has produced 2</details>
 
 -----------
 I remain your faithful servant\
